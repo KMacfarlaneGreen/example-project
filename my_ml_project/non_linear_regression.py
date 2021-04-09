@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 
 def non_lin_reg(x_nonlin, y_nonlin):
