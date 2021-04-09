@@ -5,9 +5,9 @@ def lin_reg(x,y):
     '''Function that implements linear regression'''
     ones = np.ones_like(x) # create a vector of 1's with the same length as x
 
-    X = np.stack([ones, x], axis = 1) # stack 1's and x's to get the X matrix having the 1's and x's as columns
+    X = np.stack([ones, x], axis = 1) # stack 1's and x's to get the X matrix having the 1's and x's as columns (design matrix for linear regression)
 
-    w = np.linalg.solve((X.T).dot(X) , (X.T).dot(y_lin)) # compute the optimal w using the Moore-Penrose pseudoinverse
+    w = np.linalg.solve((X.T).dot(X) , (X.T).dot(y)) # compute the optimal w using the Moore-Penrose pseudoinverse
 
     # The above line is equivalent to the following:
     # w = np.linalg.inv((X.T).dot(X)).dot(X.T).dot(y_lin)
