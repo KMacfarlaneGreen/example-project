@@ -19,7 +19,7 @@ def non_lin_reg(x_nonlin, y_nonlin):
     x_pred = np.linspace(0, 1, 100)  # 100 points equispaced between 0 and 1
 
     phi_pred = np.array(
-        [[x_ ** d for d in range(D + 1)] for x_ in xs]
+        [[x_ ** d for d in range(D + 1)] for x_ in x_pred]
     )  # design matrix for points at which to plot
 
     y_pred = phi_pred.dot(w)  # output of the model at the points above
