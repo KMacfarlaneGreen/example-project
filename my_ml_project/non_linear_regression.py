@@ -1,31 +1,38 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from my_ml_project.linear_regression_joycelyn import lin_reg, predict_linear 
+#from my_ml_project.linear_regression_joycelyn import lin_reg, predict_linear 
+from my_ml_project.linear_regression_joycelyn import LinearRegression 
 
 
-
-def featurize_phi(x, D=5):
-    phi = np.array(
-        [[x_ ** d for d in range(D + 1)] for x_ in x]
-    )
+class NonLinearRegression(LinearRegression):
     
-    return phi
+    def __init__(self, dim=5):
+        # class attributes can be accesed by any method (function) whose first argument is self
+        self.phi = np.zeros(dim) # 
+#         self.lambda = _lambda
+        self.dim = dim
 
-
-def non_lin_reg(x_nonlin, y_nonlin):
-
-    phi = featurize_phi(x_nonlin)
     
-    # abstraction 
-    w = lin_reg(phi, y_nonlin, bias=False)
+    def featurize_phi(self, x):
+        self.phi = np.array(
+            [[x_ ** d for d in range(self.dim + 1)] for x_ in x]
+        )
     
-    return w
+        return self.phi
+
+    def fit(self, x_nonlin, y_nonlin):
+
+        self.phi = NonLinearRegression.featurize_phi(x_nonlin)
+    
+        # abstraction 
+        w = LinearRegression.fit(self.phi, y_nonlin, bias=False)
+    
+        return w
 
 
-def predict(x_test, w):
+    def predict(self, x_test):
     
-    phi = featurize_phi(x_test)
     
-    return predict_linear(phi, w, bias=False)
-#     return phi.dot(w.T)
+        return LinearRegression.predict(x_test, bias=False)
+    #     return phi.dot(w.T)
     

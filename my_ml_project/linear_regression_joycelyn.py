@@ -9,35 +9,36 @@ import matplotlib.pyplot as plt
 #  Homework ? get this to work ?
 class LinearRegression(object):
     # This code might not run (try fixing)    
-    def __init__(self, dim=1, _lambda =0.001):
+    def __init__(self, dim=1):
         # class attributes can be accesed by any method (function) whose first argument is self
         self.w = np.zeros(dim) # 
 #         self.lambda = _lambda
         self.dim = dim
     
-    def fit(self, x, y, bias=True):
-        """Function that implements linear regression"""
-        ones = np.ones_like(x)  # create a vector of 1's with the same length as x
+    def bias(self, True, x):
+         ones = np.ones_like(x)  # create a vector of 1's with the same length as x
 
-        if bias:
+        if True:
             X = np.stack(
                 [ones, x], axis=1
             )  # stack 1's and x's to get the X matrix having the 1's and x's as columns (design matrix for linear regression)
         else:
             X = np.array(x)
+            
+        return X
+    
+    def fit(self, bias(True,x), y):
+        """Function that implements linear regression"""
+      
         # np.linalg.cho_solve
         self.w = np.linalg.solve(
-            (X.T).dot(X) + self.lambbda * np.eye(self.dim), (X.T).dot(y)
+                 (X.T).dot(X), (X.T).dot(y)
+            #(X.T).dot(X) + self.lambda * np.eye(self.dim), (X.T).dot(y)
         )  # compute the optimal w using the Moore-Penrose pseudoinverse
+        return self.w
     
-    
-    def predict(self, x_test, bias=True):
-        ones = np.ones_like(x_test) 
-        if bias:
-            X = np.stack(
-                [ones, x_test], axis=1
-            ) 
-
+    def predict(self, bias(True,x_test)):
+       
         y_pred = X.dot(self.w.T) 
         return y_pred
 
